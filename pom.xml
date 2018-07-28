@@ -11,8 +11,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <spring-version>5.0.7.RELEASE</spring-version>
+<!--         <spring-version>5.0.7.RELEASE</spring-version> -->
+        <spring-version>4.3.18.RELEASE</spring-version>
         <sqlite-version>3.23.1</sqlite-version>
+        <apache-common-ver>3.7</apache-common-ver>
+        <log4j-version>1.2.17</log4j-version>
     </properties>
 
     <dependencies>
@@ -24,12 +27,26 @@
             <scope>provided</scope>
         </dependency>
 
+		<!-- LOG4J -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>${log4j-version}</version>
+		</dependency>
+
 		<!-- JUNIT -->
 		<dependency>
 		    <groupId>junit</groupId>
 		    <artifactId>junit</artifactId>
 		    <version>4.12</version>
 		    <scope>test</scope>
+		</dependency>
+        
+        <!-- COMMONS-LANG3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>${apache-common-ver}</version>
 		</dependency>
         
         <!-- SQLITE-JDBC -->
