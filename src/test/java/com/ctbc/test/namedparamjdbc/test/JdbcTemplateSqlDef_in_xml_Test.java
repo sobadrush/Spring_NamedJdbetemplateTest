@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -37,6 +38,8 @@ import _01_Config.RootConfig;
 @SuppressWarnings(value = { "rawtypes", "unchecked" })
 public class JdbcTemplateSqlDef_in_xml_Test {
 
+	private static final Logger logger = Logger.getLogger(JdbcTemplateSqlDef_in_xml_Test.class);
+	
 	private static int testNum = 1;
 
 	@Resource(name = "sql_statements")
@@ -220,12 +223,13 @@ public class JdbcTemplateSqlDef_in_xml_Test {
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@Rollback(true)
 	public void test_011() throws SQLException {
 		/**
 		 * 查詢 部門表 JOIN 員工表
 		 */
+		
 		String sql = sqlsProp.getProperty("deptSQL.joinEmpData");
 		
 		List<Map<String, Object>> resultList = namedJdbcTemplate.queryForList(sql, new MapSqlParameterSource());
