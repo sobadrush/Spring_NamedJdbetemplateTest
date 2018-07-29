@@ -33,9 +33,23 @@
 	    ]]>
 	</entry>
 	
+	<entry key="deptSQL.insertBatch">
+	    <![CDATA[
+	    	-- 【批量新增部門】
+			INSERT INTO z40180_deptTB( deptno , dname , loc) VALUES ( :p_deptNo , :p_deptName , :p_deptLoc );
+	    ]]>
+	</entry>
+	
 	<entry key="deptSQL.update">
 	    <![CDATA[
 	    	-- 【更新部門】
+			UPDATE z40180_deptTB SET dname = :p_deptName , loc = :p_deptLoc WHERE deptno = :p_deptNo 
+	    ]]>
+	</entry>
+	
+	<entry key="deptSQL.updateBatch">
+	    <![CDATA[
+	    	-- 【批量更新部門】
 			UPDATE z40180_deptTB SET dname = :p_deptName , loc = :p_deptLoc WHERE deptno = :p_deptNo 
 	    ]]>
 	</entry>
