@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -21,12 +22,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = { "" })
 @PropertySource(value = { "sqlite_connection.properties" }, encoding = "utf-8")
+@ImportResource(locations = { "classpath:/spring_context/SpringSqlContext.xml" })
 @EnableTransactionManagement
 public class RootConfig {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	@Profile(value = { "sqlite_env" })
 	public DataSource dmDs() {
@@ -35,38 +37,21 @@ public class RootConfig {
 		ds.setDriverClassName(env.getProperty("sqlite.driver.classname"));
 		return ds;
 	}
-	
+
 	@Bean
 	public PlatformTransactionManager txManager(DataSource ds) {
 		return new DataSourceTransactionManager(ds);
 	}
-	
+
 	@Bean
 	public NamedParameterJdbcOperations namedParaJdbeTemplate(DataSource ds) {
 		return new NamedParameterJdbcTemplate(ds);
 	}
-	
-	
+
 	public static void main(String[] args) {
-		System.setProperty("spring.profiles.active" , "sqlite_env");
+		System.setProperty("spring.profiles.active", "sqlite_env");
 		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
 		System.out.println("@@@@@@@@@@@@@@@@");
 		context.close();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

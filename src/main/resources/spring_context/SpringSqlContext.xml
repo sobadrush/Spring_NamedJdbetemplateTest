@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- ================================================================== -->
+	<!-- 此Spring配置檔只是測試xml配置，不一定需要xml才可達到將SQL藏在xml中 -->
+	<!-- ================================================================== -->
+
+	<!-- 載入寫滿SQL敘述的XML -->
+	<util:properties id="sql_statements" location="classpath:/sql_statement/sqlite_sql_statement.xml"/>
+
+</beans>
