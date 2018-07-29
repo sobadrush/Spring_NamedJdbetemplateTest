@@ -229,9 +229,7 @@ public class JdbcTemplateSqlDef_in_xml_Test {
 		/**
 		 * 查詢 部門表 JOIN 員工表
 		 */
-		
 		String sql = sqlsProp.getProperty("deptSQL.joinEmpData");
-		
 		List<Map<String, Object>> resultList = namedJdbcTemplate.queryForList(sql, new MapSqlParameterSource());
 		for (Map<String, Object> hmap : resultList) {
 			System.out.println(" >>> " + hmap);

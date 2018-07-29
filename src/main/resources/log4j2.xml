@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 優先等級: FATAL > ERROR > WARN >INFO > DEBUG -->
+<!-- 參考：http://mistech.pixnet.net/blog/post/445174064-log4j2-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E8%88%87%E6%B8%AC%E8%A9%A6 -->
+<Configuration>
+
+    <properties>  
+        <property name="LOG_HOME">D:/logs/</property>
+        <property name="FILE_NAME">myTest</property>    
+    </properties>  
+    
+    <Appenders>
+    
+        <Console name="STDOUT_Appender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </Console>
+        
+        <File name="FILE" fileName="${LOG_HOME}/logfile_fileMode.log" append="true">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </File>
+        
+        <RollingRandomAccessFile name="myRollingRandomAccessAppender" 
+            fileName="${LOG_HOME}/${FILE_NAME}.log" 
+            filePattern="${LOG_HOME}/$${date:yyyy-MM}/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd-HH-mm}-%i.log.gz"><!-- (1)每分鐘產生一個log檔 (2)附檔名gz，會自行壓縮 -->
+            
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+            
+            <Policies>
+                <TimeBasedTriggeringPolicy /><!-- 根據 filePattern 最小單位決定多久時間生成一個新的file -->
+                <SizeBasedTriggeringPolicy size="10kb" /><!-- 容量大於多少就生一個新的file -->
+            </Policies>
+            
+            <DefaultRolloverStrategy max="20" /><!-- 最多保存幾個文件 -->
+            
+        </RollingRandomAccessFile>
+        
+    </Appenders>
+    
+    <Loggers>
+        
+        <Root level="DEBUG">
+            <AppenderRef ref="STDOUT_Appender" />
+            <AppenderRef ref="myRollingRandomAccessAppender" />
+        </Root>   
+        
+        <!-- 自訂Logger -->
+<!--         <Logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG" additivity="false"> -->
+<!--             <AppenderRef ref="STDOUT_Appender"/> -->
+<!--         </Logger> -->
+
+    </Loggers>
+    
+</Configuration>
