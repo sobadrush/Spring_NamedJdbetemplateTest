@@ -3,6 +3,7 @@ package com.ctbc.test.namedparamjdbc.test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -216,6 +217,22 @@ public class JdbcTemplateSqlDef_in_xml_Test {
 			System.out.println(" 更新成功筆數： >>> " + pp);
 		}
 		this.getShowAllData();
+	}
+	
+	@Test
+	@Ignore
+	@Rollback(true)
+	public void test_011() throws SQLException {
+		/**
+		 * 查詢 部門表 JOIN 員工表
+		 */
+		String sql = sqlsProp.getProperty("deptSQL.joinEmpData");
+		
+		List<Map<String, Object>> resultList = namedJdbcTemplate.queryForList(sql, new MapSqlParameterSource());
+		for (Map<String, Object> hmap : resultList) {
+			System.out.println(" >>> " + hmap);
+		}
+		
 	}
 	
 	private final void getShowAllData() {

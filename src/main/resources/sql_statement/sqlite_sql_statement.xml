@@ -60,7 +60,16 @@
 			DELETE FROM z40180_deptTB WHERE deptno = :p_deptNo 
 	    ]]>
 	</entry>
-
+	
+	<entry key="deptSQL.joinEmpData">
+	    <![CDATA[
+	    	-- 【查詢 部門表 JOIN 員工表】
+			SELECT * FROM z40180_deptTB AS dd 
+			JOIN z40180_empTB As ee ON 
+			dd.deptno = ee.deptno 
+	    ]]>
+	</entry>
+	
 </properties>
 
 
