@@ -26,7 +26,7 @@
             <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
             
             <Policies>
-                <TimeBasedTriggeringPolicy /><!-- 根據 filePattern 最小單位決定多久時間生成一個新的file -->
+                <TimeBasedTriggeringPolicy interval="1" /><!--(1) interval="1" 間隔1個最小單位 (2)根據 filePattern 最小單位決定多久時間生成一個新的file -->
                 <SizeBasedTriggeringPolicy size="10kb" /><!-- 容量大於多少就生一個新的file -->
             </Policies>
             
